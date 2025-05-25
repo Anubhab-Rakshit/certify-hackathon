@@ -45,7 +45,7 @@ export default function AboutPage() {
             </div>
             <div className="rounded-xl overflow-hidden border shadow-lg">
               <Image
-                src="/placeholder.svg?height=400&width=600&query=diverse%20team%20working%20on%20accessibility%20project"
+                src="/accessibility-dashboard.png?height=400&width=600&query=diverse%20team%20working%20on%20accessibility%20project"
                 alt="Our team working on accessibility solutions"
                 width={600}
                 height={400}

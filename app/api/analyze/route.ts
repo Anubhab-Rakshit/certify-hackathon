@@ -1,7 +1,6 @@
 import { type NextRequest, NextResponse } from "next/server"
 import { GoogleGenerativeAI } from "@google/generative-ai"
 import puppeteer from "puppeteer"
-import chromium from "@sparticuz/chromium"
 
 // Initialize Gemini AI with multimodal support
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || "")
@@ -18,54 +17,27 @@ async function captureWebsiteWithScreenshot(url: string) {
 
     // Launch browser with enhanced settings for complete capture
     browser = await puppeteer.launch({
-      args:
-        process.env.NODE_ENV === "production"
-          ? [
-              ...chromium.args,
-              "--no-sandbox",
-              "--disable-setuid-sandbox",
-              "--disable-dev-shm-usage",
-              "--disable-accelerated-2d-canvas",
-              "--no-first-run",
-              "--no-zygote",
-              "--disable-gpu",
-              "--disable-web-security",
-              "--disable-features=VizDisplayCompositor",
-              "--disable-blink-features=AutomationControlled",
-              "--disable-extensions",
-              "--disable-plugins",
-              "--allow-running-insecure-content",
-              "--disable-background-timer-throttling",
-              "--disable-backgrounding-occluded-windows",
-              "--disable-renderer-backgrounding",
-              "--disable-features=TranslateUI",
-              "--disable-ipc-flooding-protection",
-            ]
-          : [
-              "--no-sandbox",
-              "--disable-setuid-sandbox",
-              "--disable-dev-shm-usage",
-              "--disable-accelerated-2d-canvas",
-              "--no-first-run",
-              "--no-zygote",
-              "--disable-gpu",
-              "--disable-web-security",
-              "--disable-features=VizDisplayCompositor",
-              "--disable-blink-features=AutomationControlled",
-              "--disable-extensions",
-              "--disable-plugins",
-              "--allow-running-insecure-content",
-              "--disable-background-timer-throttling",
-              "--disable-backgrounding-occluded-windows",
-              "--disable-renderer-backgrounding",
-              "--disable-features=TranslateUI",
-              "--disable-ipc-flooding-protection",
-            ],
-      defaultViewport: chromium.defaultViewport,
-      executablePath:
-        process.env.NODE_ENV === "production" ? await chromium.executablePath() : puppeteer.executablePath(),
-      headless: chromium.headless || true,
-      ignoreHTTPSErrors: true,
+      headless: true,
+      args: [
+        "--no-sandbox",
+        "--disable-setuid-sandbox",
+        "--disable-dev-shm-usage",
+        "--disable-accelerated-2d-canvas",
+        "--no-first-run",
+        "--no-zygote",
+        "--disable-gpu",
+        "--disable-web-security",
+        "--disable-features=VizDisplayCompositor",
+        "--disable-blink-features=AutomationControlled",
+        "--disable-extensions",
+        "--disable-plugins",
+        "--allow-running-insecure-content",
+        "--disable-background-timer-throttling",
+        "--disable-backgrounding-occluded-windows",
+        "--disable-renderer-backgrounding",
+        "--disable-features=TranslateUI",
+        "--disable-ipc-flooding-protection",
+      ],
     })
 
     const page = await browser.newPage()
