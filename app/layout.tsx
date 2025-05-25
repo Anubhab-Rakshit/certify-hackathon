@@ -21,7 +21,7 @@ const manrope = Manrope({
 export const metadata: Metadata = {
   title: "AccessiScan | AI-Powered Web Accessibility That Actually Works",
   description: "Scan, analyze, and fix accessibility issues in seconds. Trusted by Fortune 500 companies.",
-    generator: 'v0.dev'
+    
 }
 
 export default function RootLayout({
